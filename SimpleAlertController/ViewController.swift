@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var button2Text: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,7 +31,17 @@ class ViewController: UIViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        let delAction = UIAlertAction(title: "Delete", style: .destructive, handler: nil)
+//        let delAction = UIAlertAction(title: "Delete", style: .default, handler: {
+//            (action: UIAlertAction) -> Void in // 리턴값 void
+//            self.view.backgroundColor = UIColor.blue
+//        })
+        
+        // 후행 클로저 (trailing closure)
+        let delAction = UIAlertAction(title: "Delete", style: .default) {
+            (action: UIAlertAction) -> Void in // 리턴값 void
+            self.view.backgroundColor = UIColor.blue
+        }
+        
         
         alertController.addAction(camAction)
         alertController.addAction(cancelAction)
@@ -39,6 +51,21 @@ class ViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
         
+    }
+    
+    
+    @IBAction func AlertButton2(_ sender: Any) {
+        
+        let alertController2 = UIAlertController(title: "Hello LHB", message: "What do you want to do?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .default) {
+            (action: UIAlertAction) -> Void in
+            self.button2Text.text = "LHB"
+        }
+        
+        alertController2.addAction(ok)
+        
+        present(alertController2, animated: true, completion: nil)
     }
     
 }
